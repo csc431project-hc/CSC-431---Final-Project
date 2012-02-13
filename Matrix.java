@@ -163,6 +163,54 @@ class Matrix {
 	    return false;
 	} 
     }
+    
+    //Subtracts the matrices, element by element, provided that the two matrices are
+    //of the same dimensions 
+    public Matrix subtract(Matrix matA, Matrix matB){
+
+    	int rCount, cCount;
+    	Matrix matS = null;
+
+    	if (checkDimensions(matA, matB)){
+
+    	    matS = new Matrix(matA.rows, matB.rows);
+
+    	    for (rCount = 0; rCount < matS.rows; rCount++){
+    	    	for (cCount = 0; cCount < matS.cols; cCount++){
+    	    		matS.setItem(rCount, cCount, matA.getItem(rCount, cCount)
+    	    									- matB.getItem(rCount, cCount));
+    		}
+    	    }	   
+
+    	}
+
+    	return matS;
+        }    
+        
+    //Function that reverses the order of subtraction for the two matrices by copying and negating all values of 
+    //the first matrix into a new matrix, which is added to the second matrix
+    //Note:Dimension is checked already by add function
+    public Matrix rSubtract(Matrix matA, Matrix matB){
+
+    	Matrix matRS = null;
+
+    	    matRS = new Matrix(matA.rows, matB.rows);
+    	    Matrix matNA = new Matrix(matA.rows, matA.cols);
+    	   
+    	    for ( int rCount=0; rCount<matNA.rows; rCount++)
+    	    {
+    	      for ( int cCount=0; cCount<matNA.cols; cCount++ )
+    	    {
+    	    	  matNA.setItem(rCount,cCount, (-1) *matA. getItem(rCount,cCount));
+    	    }
+    	    
+    	    }
+
+    	      matRS = add(matNA, matB);
+
+    	return matRS;
+        }    
+    
 
     //A function to print the matrix
     public void printMatrix(){
@@ -205,8 +253,14 @@ class Matrix {
 	newMatrix = newMatrix.identity(4);
 	
 	Matrix threeMatrix = testMatrix.add(testMatrix, newMatrix);
+	Matrix testSMatrix = testMatrix.subtract(testMatrix, newMatrix);
+	Matrix testRSMatrix = testMatrix.rSubtract(testMatrix, newMatrix);
 
 	threeMatrix.printMatrix();
+	System.out.println("\n Subtracted Matrices");
+	testSMatrix.printMatrix();
+	System.out.println("\n Reversed Matrices Subtraction");
+	testRSMatrix.printMatrix();
 	
     }
 }
