@@ -273,15 +273,22 @@ class Matrix {
 	testMatrix = newMatrix.diagonal(vals);
 	newMatrix = newMatrix.identity(4);
 	
-	Matrix threeMatrix = testMatrix.add(testMatrix, newMatrix);
-	Matrix testSMatrix = testMatrix.subtract(testMatrix, newMatrix);
-	Matrix testRSMatrix = testMatrix.rSubtract(testMatrix, newMatrix);
-
+	Matrix threeMatrix = Matrix.add(testMatrix, newMatrix);
+	Matrix testSMatrix = Matrix.subtract(testMatrix, newMatrix);
+	Matrix testRSMatrix = Matrix.rSubtract(testMatrix, newMatrix);
+	Matrix testRAMatrix = Matrix.rAdd(testMatrix, newMatrix);
+	Matrix testNMatrix = Matrix.negate(testMatrix);
+	
+	System.out.println("\n Matrices Addition");
 	threeMatrix.printMatrix();
 	System.out.println("\n Subtracted Matrices");
 	testSMatrix.printMatrix();
 	System.out.println("\n Reversed Matrices Subtraction");
 	testRSMatrix.printMatrix();
+	System.out.println("\n Reversed Matrices Addition");
+	testRAMatrix.printMatrix();
+	System.out.println("\n Negated Matrix");
+	testNMatrix.printMatrix();
 	
     }
 }
