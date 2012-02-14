@@ -134,7 +134,7 @@ class Matrix {
     }
 
     //Adds to matrices together provided they have the same dimensions
-    public Matrix add (Matrix matA, Matrix matB){
+    public static Matrix add (Matrix matA, Matrix matB){
 	
 	int rCount, cCount;
 	Matrix matC = null;
@@ -155,7 +155,7 @@ class Matrix {
     }
 
     //Helper function to ensure the dimensions are the same
-    public boolean checkDimensions(Matrix matA, Matrix matB){
+    public static boolean checkDimensions(Matrix matA, Matrix matB){
 	if ((matA.cols == matB.cols) && (matA.rows == matB.rows)){
 	   return true;
 	 }
@@ -166,7 +166,7 @@ class Matrix {
     
     //Subtracts the matrices, element by element, provided that the two matrices are
     //of the same dimensions 
-    public Matrix subtract(Matrix matA, Matrix matB){
+    public static Matrix subtract(Matrix matA, Matrix matB){
 
     	int rCount, cCount;
     	Matrix matS = null;
@@ -187,10 +187,18 @@ class Matrix {
     	return matS;
         }    
         
+     //Adds the matrices in reverse order
+    //Note:Dimensions checked by add function already
+    public static Matrix rAdd(Matrix matA, Matrix matB)
+    {
+    	return add(matB,matA);
+    	
+    }
+        
     //Function that reverses the order of subtraction for the two matrices by copying and negating all values of 
     //the first matrix into a new matrix, which is added to the second matrix
     //Note:Dimension is checked already by add function
-    public Matrix rSubtract(Matrix matA, Matrix matB){
+    public static Matrix rSubtract(Matrix matA, Matrix matB){
 
     	Matrix matRS = null;
 
@@ -211,7 +219,20 @@ class Matrix {
     	return matRS;
         }    
     
-
+  //A function to negate a matrix
+    public static Matrix negate(Matrix matA){
+    
+    	Matrix matNA = new Matrix(matA.rows, matA.cols);
+    	for ( int rCount=0; rCount<matNA.rows; rCount++)
+	    {
+	      for ( int cCount=0; cCount<matNA.cols; cCount++ )
+	      {
+	    	  matNA.setItem(rCount,cCount, (-1) *matA. getItem(rCount,cCount));
+	      }
+	    
+	    }
+    	return matNA;
+    }
     //A function to print the matrix
     public void printMatrix(){
 	int cCount, rCount;
